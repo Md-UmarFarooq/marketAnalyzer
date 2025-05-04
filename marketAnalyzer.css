@@ -326,14 +326,6 @@
 }
 
 
-.hide-images{
-  position: sticky;
-    top: 20px; 
-    right: 20px;
-    z-index: 10;
-}
-
-
   .market-image-container{
     min-width: 33%;
   }
@@ -355,7 +347,6 @@
   }
 
   .market-details{
-    position: relative;
     min-height: 29vh;
     display: flex;
     width: 70%;
