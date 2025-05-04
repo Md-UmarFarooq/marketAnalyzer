@@ -639,43 +639,41 @@ function toggleFloorImages() {
   }
   
   // Click event for hide-images button
-  hideImagesbtn.addEventListener('click', toggleFloorImages);
-  
-  // Keyboard event for 'h' key
-  document.addEventListener('keydown', (event) => {
-    // Only trigger if market-details-container is visible and 'h' is pressed
-    if (event.key.toLowerCase() === 'h' && marketDetailsContainer.style.display !== 'none') {
-      toggleFloorImages();
-    }
-  });
-  
-  // Double-tap detection for mobile
-  let lastTap = 0;
-  let tapTimeout;
-  marketDetailsContainer.addEventListener('touchstart', (event) => {
-    const currentTime = new Date().getTime();
-    const tapDelay = currentTime - lastTap;
-  
-    // Check if taps are within 300ms
-    if (tapDelay < 300 && tapDelay > 0) {
-      toggleFloorImages();
-      clearTimeout(tapTimeout); // Clear any pending single-tap actions
-    }
-  
-    lastTap = currentTime;
-  
-    // Optional: Prevent accidental zoom or other touch behaviors
-    event.preventDefault();
-  });
-  
-  // Optional: Ensure hide-images button is only visible when market-details-container is
-  function toggleHideImagesButton() {
-    hideImagesbtn.style.display = marketDetailsContainer.style.display !== 'none' ? 'block' : 'none';
+ hideImagesbtn.addEventListener('click', toggleFloorImages);
+
+// Keyboard event for 'h' key
+document.addEventListener('keydown', (event) => {
+  // Only trigger if market-details-container is visible and 'h' is pressed
+  if (event.key.toLowerCase() === 'h' && marketDetailsContainer.style.display !== 'none') {
+    toggleFloorImages();
   }
-  
-  // Update button visibility when market-details-container changes
-  marketDetailsContainer.addEventListener('transitionend', toggleHideImagesButton);
-  toggleHideImagesButton();
+});
+
+// Double-tap detection for mobile
+let lastTap = 0;
+let tapTimeout;
+marketDetailsContainer.addEventListener('touchstart', (event) => {
+  const currentTime = new Date().getTime();
+  const tapDelay = currentTime - lastTap;
+
+  // Check if taps are within 300ms
+  if (tapDelay < 300 && tapDelay > 0) {
+    event.preventDefault(); // Only prevent default for double-taps
+    toggleFloorImages();
+    clearTimeout(tapTimeout); // Clear any pending single-tap actions
+  }
+
+  lastTap = currentTime;
+});
+
+// Optional: Ensure hide-images button is only visible when market-details-container is
+function toggleHideImagesButton() {
+  hideImagesbtn.style.display = marketDetailsContainer.style.display !== 'none' ? 'block' : 'none';
+}
+
+// Update button visibility when market-details-container changes
+marketDetailsContainer.addEventListener('transitionend', toggleHideImagesButton);
+toggleHideImagesButton();
 
 
 
